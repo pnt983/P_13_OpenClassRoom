@@ -35,4 +35,4 @@ workflows:
       - test-and-lint
       - build-and-push-to-dockerhub:
       requires:
-            - test-and-lint
+          - test-and-lint
