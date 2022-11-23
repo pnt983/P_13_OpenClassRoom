@@ -34,5 +34,5 @@ workflows:
     jobs:
       - test-and-lint
       - build-and-push-to-dockerhub:
-      requires:
+        requires:
           - test-and-lint
