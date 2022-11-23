@@ -1,0 +1,51 @@
+version: 2.1
+
+orbs:
+  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
+  python: circleci/python@1.5.0
+  # heroku: circleci/heroku@1.2.6
+
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build-and-test:
+    # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
+    # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
+    docker:
+      - image: cimg/python:3.10.2
+    # Checkout the code as the first step. This is a dedicated CircleCI step.
+    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
+          # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
+      - run:
+          name: Run tests
+          # This assumes pytest is installed via the install-package step above
+          command: pytest
+       - run:
+          name: Run linting
+          command: flake8
+  
+  # deploy:
+  #   executor: python/default
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/project
+  #     - heroku/deploy-via-git:
+  #         force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test:
+      # - deploy:
+      #     requires:
+      #       - build_and_test # only deploy if the build_and_test job has completed
+      #     filters:
+      #       branches:
+      #         only: main # only deploy when on main
