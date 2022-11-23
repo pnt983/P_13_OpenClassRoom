@@ -24,15 +24,19 @@ jobs:
           version: 19.03.13
           docker_layer_caching: true
       - run: |
-          TAG=0.1.$CIRCLE_BUILD_NUM
-          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: docker build -t Klm9/p_13:$TAG .
-      - run: docker push Klm9/p_13:$TAG
+          echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - run: docker build -t klm9/p_13:$CIRCLE_SHA1 .
+      - run: docker push klm9/p_13:$CIRCLE_SHA1
 
 workflows:
   build-and-test-workflow:
     jobs:
       - test-and-lint
       - build-and-push-to-dockerhub:
-        requires:
-          - test-and-lint
+        # requires:
+        #   - test-and-lint
+        filters:
+            branches:
+              only: 
+                - master
+        
