@@ -15,7 +15,7 @@ jobs:
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
     steps:
-      - checkout
+      # - checkout
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
