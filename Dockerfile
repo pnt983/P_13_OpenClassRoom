@@ -6,13 +6,13 @@ COPY ./requirements.txt requirements.txt
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV port=8000
+ENV PORT=8000
 
 RUN pip install -r requirements.txt
 
 COPY . .
 
 # CMD ["python", "/app/manage.py", "runserver", "0.0.0.0:8000"]
-# CMD ["python", "/app/manage.py", "runserver", "0.0.0.0:$PORT"]
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+CMD ["python", "/app/manage.py", "runserver", "0.0.0.0:$PORT"]
+# CMD gunicorn oc_lettings_site.wsgi:application --bind ALLOWED_HOSTS:$PORT
 
