@@ -15,6 +15,7 @@ jobs:
       - run:
           name: run tests
           command: pytest
+  
   build-and-push-to-dockerhub:
     docker:
       - image: cimg/python:3.10.1
@@ -27,6 +28,19 @@ jobs:
           echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
       - run: docker build -t klm9/p_13:$CIRCLE_SHA1 .
       - run: docker push klm9/p_13:$CIRCLE_SHA1
+  
+  deploy-heroku:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - setup_remote_docker
+      - run:
+          name: Push to heroku
+          command:  |
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
 
 workflows:
   build-and-test-workflow:
@@ -39,4 +53,10 @@ workflows:
             branches:
               only: 
                 - master
-        
+      - deploy-heroku:
+          requires:
+            - build-and-push
+          filters:
+            branches:
+              only:
+                - master  
