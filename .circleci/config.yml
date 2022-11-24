@@ -59,7 +59,7 @@ workflows:
                 - master
       - deploy-heroku:
           requires:
-            - build-and-push
+            - build-and-push-to-dockerhub
           filters:
             branches:
               only:
