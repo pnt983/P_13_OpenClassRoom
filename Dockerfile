@@ -6,7 +6,7 @@ COPY ./requirements.txt requirements.txt
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-# ENV PORT=8000
+ENV PORT=8080
 
 RUN pip install -r requirements.txt
 
