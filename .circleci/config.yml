@@ -53,12 +53,12 @@ workflows:
     jobs:
       - test-and-lint
       - build-and-push-to-dockerhub:
-        requires:
-          - test-and-lint
-          filters:
-              branches:
-                only: 
-                  - master
+        # requires:
+        #   - test-and-lint
+        filters:
+          branches:
+            only: 
+              - master
       - deploy-heroku:
           requires:
             - build-and-push-to-dockerhub
