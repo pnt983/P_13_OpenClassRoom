@@ -30,10 +30,10 @@ jobs:
           docker_layer_caching: true
       - run: |
           echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: docker build -t klm9/p_13:$CIRCLE_SHA1 .
-      - run: docker tag klm9/p_13:$CIRCLE_SHA1 klm9/p_13:latest
-      - run: docker push klm9/p_13:$CIRCLE_SHA1
-      - run: docker push klm9/p_13:latest
+      - run: docker build -t klm9/oc-lettings-klm:$CIRCLE_SHA1 .
+      - run: docker tag klm9/oc-lettings-klm:$CIRCLE_SHA1 klm9/oc-lettings-klm:latest
+      - run: docker push klm9/oc-lettings-klm:$CIRCLE_SHA1
+      - run: docker push klm9/oc-lettings-klm:latest
   
   deploy-heroku:
     executor: heroku/default

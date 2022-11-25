@@ -13,7 +13,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # CMD ["python", "/app/manage.py", "runserver", "0.0.0.0:$PORT"]
-# CMD python manage.py runserver 0.0.0.0:$PORT
+CMD python manage.py runserver 0.0.0.0:$PORT
 # CMD python /app/manage.py runserver 0.0.0.0:$PORT
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+# CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
 
