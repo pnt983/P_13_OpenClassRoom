@@ -31,10 +31,10 @@ jobs:
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: docker build -t klm9/oc-lettings-klm:$TAG .
-      - run: docker tag klm9/oc-lettings-klm:$TAG klm9/oc-lettings-klm:latest
-      - run: docker push klm9/oc-lettings-klm:$TAG
-      - run: docker push klm9/oc-lettings-klm:latest
+          docker build -t klm9/oc-lettings-klm:$TAG .
+          docker tag klm9/oc-lettings-klm:$TAG klm9/oc-lettings-klm:latest
+          docker push klm9/oc-lettings-klm:$TAG
+          docker push klm9/oc-lettings-klm:latest
   
   deploy-heroku:
     executor: heroku/default
