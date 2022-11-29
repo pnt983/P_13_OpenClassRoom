@@ -75,3 +75,17 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### Déploiement
+
+- Après toutes modifications dans le code, la commande `git push` sur la branche
+  `master` envoie le code sur CircleCI qui s'occupe de la compilation et du déploiement de l'application sur Heroku.
+- Pour modifier Docker, utiliser le fichier `Dockerfile`
+- Pour modifier la configuration de CircleCI, utiliser le fichier `config.yml`
+
+#### Configuration requise pour le déploiement
+
+- DOCKERHUB_PASSWORD: Mot de passe Docker
+- DOCKERHUB_USERNAME: Nom de compte sur Docker
+- HEROKU_API_KEY: clé d'accès de Heroku
+- HEROKU_APP_NAME: Nom de l'application dans Heroku 
