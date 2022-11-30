@@ -54,8 +54,8 @@ workflows:
     jobs:
       - test-and-lint
       - build-and-push-to-dockerhub:
-        # requires:
-        #   - test-and-lint
+        requires:
+          - test-and-lint
         filters:
           branches:
             only: 
