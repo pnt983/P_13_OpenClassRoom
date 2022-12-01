@@ -12,6 +12,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:$PORT"]
 # CMD python manage.py runserver 0.0.0.0:$PORT
 # CMD python /app/manage.py runserver 0.0.0.0:$PORT
