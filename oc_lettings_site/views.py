@@ -9,3 +9,10 @@ from django.shortcuts import render
 # Praesent volutpat porttitor magna, non finibus neque cursus id.
 def index(request):
     return render(request, 'index.html')
+
+
+# Fontion pour lever une Exception et montrer le fonctionnement de Sentry
+def sentry_error(request):
+    error = 100 / 0
+    context = {"sentry": error}
+    return render(request, 'index.html', context)
