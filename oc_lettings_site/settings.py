@@ -2,9 +2,12 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+# "https://1d5e73b8e2f1417a82cc9d0348322b98@o4504197186256896.ingest.sentry.io/4504293498748928"
+
+sentry_1 = "https://1d5e73b8e2f1417a82cc9d0348322b98"
+sentry_2 = "@o4504197186256896.ingest.sentry.io/4504293498748928"
 sentry_sdk.init(
-    dsn="https://1d5e73b8e2f1417a82cc9d0348322b98@o4504197186256896.ing\
-         est.sentry.io/4504293498748928",
+    dsn=sentry_1 + sentry_2,
     integrations=[
         DjangoIntegration(),
     ],
